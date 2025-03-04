@@ -1,6 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 part 'counter.g.dart';
+
+
+
 
 @riverpod
 class Counter extends _$Counter {
@@ -12,4 +15,5 @@ class Counter extends _$Counter {
   void increment() {
     state++;
   }
+
 }
