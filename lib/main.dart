@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preference/provider/counter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,18 +12,48 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Home());
+    return MaterialApp(home: CounterPage());
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+
+class CounterPage extends ConsumerWidget {
+  const CounterPage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(counterProvider);
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("$counter", style: TextStyle(fontSize: 30)),
+            SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () => ref.read(counterProvider.notifier).increment(),
+              child: Text("+", style: TextStyle(fontSize: 15)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _HomeState extends State<Home> {
+
+
+
+
+class Home2 extends StatefulWidget {
+  const Home2({super.key});
+
+  @override
+  State<Home2> createState() => _HomeState();
+}
+
+  class _HomeState extends State<Home2> {
   int counter = 10;
 
   @override
