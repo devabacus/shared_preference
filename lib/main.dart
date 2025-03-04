@@ -29,11 +29,27 @@ class CounterPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("$counter", style: TextStyle(fontSize: 30)),
+            switch (counter) {
+              AsyncData(:final value) => Text("$value", style: TextStyle(fontSize: 30)),
+              AsyncError() => Text("something wrong"),
+              _ => CircularProgressIndicator()
+            },
+            // counter.when(
+            //   data: (value) => Text("$value", style: TextStyle(fontSize: 30)),
+            //   error: (error, _) => Text("$error", style: TextStyle(fontSize: 30)),
+            //   loading: () => CircularProgressIndicator()
+            // ),
+            
             SizedBox(height: 30),
+            
             ElevatedButton(
               onPressed: () => ref.read(counterProvider.notifier).increment(),
               child: Text("+", style: TextStyle(fontSize: 15)),
+            ),
+
+            ElevatedButton(
+              onPressed: () => ref.read(counterProvider.notifier).reset(),
+              child: Text("Сброс", style: TextStyle(fontSize: 15)),
             ),
           ],
         ),

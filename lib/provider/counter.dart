@@ -2,18 +2,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'counter.g.dart';
 
-// @riverpod
-// class Counter extends _$Counter {
-//   @override
-//   int build() {
-//     return 77;
-//   }
-
-//   void increment() {
-//     state++;
-//   }
-
-// }
 
 @riverpod
 class Counter extends _$Counter {
@@ -27,9 +15,14 @@ class Counter extends _$Counter {
     final currentState = await future;
     
     final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('counter', currentState + 1);
+    await prefs.setInt('counter', currentState + 1);
     state = AsyncData(currentState + 1);
   }
 
+  Future<void> reset() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('counter', 0);
+    state = AsyncData(0);
+    }
 
 }
