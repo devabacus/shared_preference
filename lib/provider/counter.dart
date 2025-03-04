@@ -17,3 +17,13 @@ class Counter extends _$Counter {
   }
 
 }
+
+
+@riverpod
+class sharedPrefGetCounterValue extends _$sharedPrefGetCounterValue {
+  @override
+  FutureOr<int> build() {
+    return 0;
+  }
+  
+}
