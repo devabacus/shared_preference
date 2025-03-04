@@ -34,3 +34,7 @@ flutter pub add json_annotation
 flutter pub add freezed --dev
 flutter pub add json_serializable --dev
 flutter pub add build_runner --dev
+
+
+
+flutter pub add shared_preferences
